@@ -1,7 +1,7 @@
 ##### set specific gpu #####
 import os
-os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"]="1"
+#os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"
+#os.environ["CUDA_VISIBLE_DEVICES"]="1"
 import tensorflow as tf
 physical_devices = tf.config.experimental.list_physical_devices('GPU')
 assert len(physical_devices) > 0, "Not enough GPU hardware devices available"
@@ -268,13 +268,13 @@ if __name__ == "__main__":
         "MNIST"
         "CIFAR"
     """
-    model_names = ["GAN", "VAE", "WGAN"]
-    lantent_sizes = [50, 100, 10, 20, 200]
-    num_hiddens = [0, 1, 2, 3]
+    model_names = ["GAN", "WGAN", "VAE"]
+    lantent_sizes = [50, 10, 20, 100]
+    num_hiddens = [0, 1, 2]
     
-    for latent_size in lantent_sizes:
-        for model_name in model_names:
-            train(model_name, "CIFAR", 0, latent_size)
+    #for latent_size in lantent_sizes:
+    #    for model_name in model_names:
+    #        train(model_name, "CIFAR", 0, latent_size)
 
     for num_hidden in num_hiddens:
         for model_name in model_names:
