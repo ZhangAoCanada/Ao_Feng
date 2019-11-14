@@ -314,16 +314,10 @@ if __name__ == "__main__":
         "MNIST"
         "CIFAR"
     """
-    lantent_sizes_tmp = [100]
-    model_names_tmp = ["WGAN", "VAE"]
     model_names = ["GAN", "WGAN", "VAE"]
 
     lantent_sizes = [50]
-    num_hiddens = [0, 1, 2, 3]
-
-    for latent_size in lantent_sizes_tmp:
-        for model_name in model_names_tmp:
-            train(model_name, "CIFAR", 0, latent_size)
+    num_hiddens = [2]
 
     for latent_size in lantent_sizes:
         for model_name in model_names:
@@ -331,4 +325,4 @@ if __name__ == "__main__":
 
     for num_hidden in num_hiddens:
         for model_name in model_names:
-            train(model_name, "CIFAR", num_hidden, 100)
+            train(model_name, "CIFAR", num_hidden, 50)

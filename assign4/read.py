@@ -87,7 +87,7 @@ def ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_lay
     fig = plt.figure(figsize = (18, 10))
     ax1 = fig.add_subplot(111)
 
-    for file_id in range(900, num_files):
+    for file_id in range(350, num_files):
         # get image sequence number
         file_n = "samples/" + model_name + "_" + dataset_name + "_" + str(num_hidden) + \
                     "_" + str(latent_size) + "_" + str(hidden_layer_size) + "/" + str(file_id) + ".npy"
