@@ -110,7 +110,7 @@ def ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_lay
     all_files = glob(dir_n + "*.npy")
     num_files = len(all_files)
 
-    fig = plt.figure(figsize = (18, 10))
+    fig = plt.figure(figsize = (18, 12))
     ax1 = fig.add_subplot(111)
 
     for file_id in range(350, num_files):
