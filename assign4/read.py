@@ -35,8 +35,8 @@ def ReadRandomFromIds(model_name, dataset_name, num_hidden, latent_size, hidden_
     dir_n = "samples/" + model_name + "_" + dataset_name + "_" + str(num_hidden) + "_" + \
                 str(latent_size) + "_" + str(hidden_layer_size) + "/"
 
-    fig = plt.figure()
-    ax1 = fig.add_subplot(111)
+    # fig = plt.figure()
+    # ax1 = fig.add_subplot(111)
 
     all_samples = []
     hm_ids = len(ids)
@@ -68,7 +68,31 @@ def ReadRandomFromIds(model_name, dataset_name, num_hidden, latent_size, hidden_
         all_imgs.append(row_imgs)
     all_imgs = np.concatenate(all_imgs, axis = 0)    
     
-    ax1.imshow(all_imgs, cmap="gray")
+    # ax1.imshow(all_imgs, cmap="gray")
+    # ax1.axis("off")
+    # # ax1.set_title(str(file_id))
+    # plt.show()
+    return all_imgs
+
+def PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size):
+    """
+    Function:
+        Result of inspecting.
+    """
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+
+    imgs_all = []
+    for count in range(5):
+        if dataset_name == "MNIST":
+            indexes = np.random.randint(count*100, (count+1)*100, size=10)
+        else:
+            indexes = np.random.randint(2*count*100, (2*count+1)*100, size=10)
+        img = ReadRandomFromIds(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size, indexes)
+        imgs_all.append(img)
+    imgs_all = np.concatenate(imgs_all, axis=0)
+
+    ax1.imshow(imgs_all, cmap="gray")
     ax1.axis("off")
     # ax1.set_title(str(file_id))
     plt.show()
@@ -132,8 +156,6 @@ if __name__ == "__main__":
     latent_size = 100
     hidden_layer_size = 256
 
-    ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size)
+    # ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size)
 
-    # indexes = np.random.randint(800, 1000, size=100)
-
-    # ReadRandomFromIds(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size, indexes)
+    PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size)
