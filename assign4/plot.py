@@ -60,7 +60,7 @@ def PlotWithSparse(x, y, ax, color, line_label):
     # two different styles for plotting
     style1 = color + '-.'
     style2 = color + '-'
-    ax.plot(x, y, style1, alpha = 0.5)
+    ax.plot(x, y, style1, alpha = 0.35)
     x_prime, y_prime = SparseData(x, y)
     line, = ax.plot(x_prime, y_prime, style2)
     # set labels for legend
@@ -90,7 +90,7 @@ def PlotAll(mode, model_name, dataset_name, num_hiddens, latent_sizes, xlim, yli
     """
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    colors = ['r', 'b', 'm', 'g', 'y']
+    colors = ['r', 'b', 'g', 'y', 'm']
 
     if mode == "latents":
         assert len(latent_sizes) > 0
@@ -152,8 +152,8 @@ if __name__ == "__main__":
     """
     model_names = ["GAN", "WGAN", "VAE"]
     dataset_names = ["MNIST", "CIFAR"]
-    latent_sizes = [100]
-    num_hiddens = 0
+    latent_sizes = 50
+    num_hiddens = [0, 1, 2]
 
     
     if isinstance(latent_sizes, list):
@@ -161,4 +161,4 @@ if __name__ == "__main__":
     else:
         mode = "hiddens"
         
-    PlotAll(mode, "WGAN", "CIFAR", num_hiddens, latent_sizes, [0, 200000], [-0.005, 0.012])
+    PlotAll(mode, "WGAN", "CIFAR", num_hiddens, latent_sizes, [0, 200000], [-0.015, 0.08])

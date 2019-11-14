@@ -72,7 +72,7 @@ def PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_
     Function:
         Result of inspecting.
     """
-    fig = plt.figure()
+    fig = plt.figure(figsize = (18, 5))
     ax1 = fig.add_subplot(111)
 
     imgs_all = []
@@ -88,7 +88,7 @@ def PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_
     ax1.imshow(imgs_all, cmap="gray")
     ax1.axis("off")
     # ax1.set_title(str(file_id))
-    save_image_name = "samples/" + model_name + "_" + dataset_name + "_" + \
+    save_image_name = "examples/" + model_name + "_" + dataset_name + "_" + \
         str(num_hidden) + "_" + str(latent_size) + "_" + str(hidden_layer_size) + ".png"
     plt.savefig(save_image_name)
     plt.show()
@@ -98,7 +98,7 @@ def PlotResults(model_name, dataset_name, num_hidden, latent_size, hidden_layer_
     Function:
         Result of inspecting.
     """
-    fig = plt.figure()
+    fig = plt.figure(figsize = (18, 5))
     ax1 = fig.add_subplot(111)
 
     if dataset_name == "MNIST":
@@ -111,7 +111,7 @@ def PlotResults(model_name, dataset_name, num_hidden, latent_size, hidden_layer_
     ax1.imshow(imgs_all, cmap="gray")
     ax1.axis("off")
     # ax1.set_title(str(file_id))
-    save_image_name = "samples/" + model_name + "_" + dataset_name + "_" + \
+    save_image_name = "examples/" + model_name + "_" + dataset_name + "_" + \
         str(num_hidden) + "_" + str(latent_size) + "_" + str(hidden_layer_size) + "results.png"
     plt.savefig(save_image_name)
     plt.show()
@@ -168,11 +168,11 @@ if __name__ == "__main__":
         "MNIST"
         "CIFAR"
     """
-    model_name = "WGAN"
+    model_name = "VAE"
     dataset_name = "CIFAR"
 
     num_hidden = 0
-    latent_size = 100
+    latent_size = 50
     hidden_layer_size = 256
 
     # ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size)
