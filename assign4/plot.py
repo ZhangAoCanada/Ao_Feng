@@ -97,9 +97,11 @@ def PlotAll(mode, model_name, dataset_name, num_hiddens, latent_sizes, xlim, yli
         for i in range(len(latent_sizes)):
             latent_size = latent_sizes[i]
             x, y = GetOnePlot(model_name, dataset_name, num_hiddens, latent_size)
-            if latent_size == 100:
-                x = x[:len(x)//2]
-                y = y[:len(y)//2]
+            if model_name == "WGAN":
+                y = - y
+            # if latent_size == 100:
+            #     x = x[:len(x)//2]
+            #     y = y[:len(y)//2]
             PlotWithSparse(x, y, ax, colors[i], model_name + " with latent size " + str(latent_size))
         ax.set_title("Influen of different latent sizes on " + model_name)
         ax.set_xlim(xlim)
@@ -115,9 +117,11 @@ def PlotAll(mode, model_name, dataset_name, num_hiddens, latent_sizes, xlim, yli
         for i in range(len(num_hiddens)):
             num_hidden = num_hiddens[i]
             x, y = GetOnePlot(model_name, dataset_name, num_hidden, latent_sizes)
-            if num_hidden == 0:
-                x = x[:len(x)//2]
-                y = y[:len(y)//2]
+            if model_name == "WGAN":
+                y = - y
+            # if num_hidden == 0:
+            #     x = x[:len(x)//2]
+            #     y = y[:len(y)//2]
             if dataset_name == "CIFAR":
                 PlotWithSparse(x, y, ax, colors[i], model_name + " with hidden layers " + str(num_hidden + 4))
             else:
@@ -148,7 +152,7 @@ if __name__ == "__main__":
     """
     model_names = ["GAN", "WGAN", "VAE"]
     dataset_names = ["MNIST", "CIFAR"]
-    latent_sizes = [10, 20, 50, 100]
+    latent_sizes = [100]
     num_hiddens = 0
 
     
@@ -157,4 +161,4 @@ if __name__ == "__main__":
     else:
         mode = "hiddens"
         
-    PlotAll(mode, "GAN", "MNIST", num_hiddens, latent_sizes, [0, 100000], [1, 7])
+    PlotAll(mode, "WGAN", "CIFAR", num_hiddens, latent_sizes, [0, 200000], [-0.005, 0.012])
