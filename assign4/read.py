@@ -94,7 +94,9 @@ def PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_
 
     ax1.imshow(imgs_all, cmap="gray")
     ax1.axis("off")
-    # ax1.set_title(str(file_id))
+    save_image_name = "samples/" + model_name + "_" + dataset_name + "_" + \
+        str(num_hidden) + "_" + str(latent_size) + "_" + str(hidden_layer_size) + ".png"
+    plt.savefig(save_image_name)
     plt.show()
 
 def ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size, ids=None):
@@ -149,11 +151,11 @@ if __name__ == "__main__":
         "MNIST"
         "CIFAR"
     """
-    model_name = "WGAN"
+    model_name = "GAN"
     dataset_name = "CIFAR"
 
     num_hidden = 0
-    latent_size = 100
+    latent_size = 10
     hidden_layer_size = 256
 
     # ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size)
