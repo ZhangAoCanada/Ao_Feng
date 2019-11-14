@@ -35,9 +35,6 @@ def ReadRandomFromIds(model_name, dataset_name, num_hidden, latent_size, hidden_
     dir_n = "samples/" + model_name + "_" + dataset_name + "_" + str(num_hidden) + "_" + \
                 str(latent_size) + "_" + str(hidden_layer_size) + "/"
 
-    # fig = plt.figure()
-    # ax1 = fig.add_subplot(111)
-
     all_samples = []
     hm_ids = len(ids)
     for file_id in ids:
@@ -66,12 +63,8 @@ def ReadRandomFromIds(model_name, dataset_name, num_hidden, latent_size, hidden_
             row_imgs.append(all_samples[i, j])
         row_imgs = np.concatenate(row_imgs, axis = 1)
         all_imgs.append(row_imgs)
-    all_imgs = np.concatenate(all_imgs, axis = 0)    
-    
-    # ax1.imshow(all_imgs, cmap="gray")
-    # ax1.axis("off")
-    # # ax1.set_title(str(file_id))
-    # plt.show()
+    all_imgs = np.concatenate(all_imgs, axis = 0)
+
     return all_imgs
 
 def PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size):
@@ -79,7 +72,7 @@ def PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_
     Function:
         Result of inspecting.
     """
-    fig = plt.figure(figsize=(16, 4))
+    fig = plt.figure()
     ax1 = fig.add_subplot(111)
 
     imgs_all = []
@@ -94,8 +87,32 @@ def PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_
 
     ax1.imshow(imgs_all, cmap="gray")
     ax1.axis("off")
+    # ax1.set_title(str(file_id))
     save_image_name = "samples/" + model_name + "_" + dataset_name + "_" + \
         str(num_hidden) + "_" + str(latent_size) + "_" + str(hidden_layer_size) + ".png"
+    plt.savefig(save_image_name)
+    plt.show()
+
+def PlotResults(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size):
+    """
+    Function:
+        Result of inspecting.
+    """
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+
+    if dataset_name == "MNIST":
+        indexes = np.random.randint(400, 500, size=50)
+    else:
+        indexes = np.random.randint(800, 1000, size=50)
+    img = ReadRandomFromIds(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size, indexes)
+    imgs_all = img
+
+    ax1.imshow(imgs_all, cmap="gray")
+    ax1.axis("off")
+    # ax1.set_title(str(file_id))
+    save_image_name = "samples/" + model_name + "_" + dataset_name + "_" + \
+        str(num_hidden) + "_" + str(latent_size) + "_" + str(hidden_layer_size) + "results.png"
     plt.savefig(save_image_name)
     plt.show()
 
@@ -110,7 +127,7 @@ def ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_lay
     all_files = glob(dir_n + "*.npy")
     num_files = len(all_files)
 
-    fig = plt.figure(figsize = (18, 12))
+    fig = plt.figure(figsize = (18, 10))
     ax1 = fig.add_subplot(111)
 
     for file_id in range(350, num_files):
@@ -151,13 +168,14 @@ if __name__ == "__main__":
         "MNIST"
         "CIFAR"
     """
-    model_name = "GAN"
+    model_name = "WGAN"
     dataset_name = "CIFAR"
 
     num_hidden = 0
-    latent_size = 10
+    latent_size = 100
     hidden_layer_size = 256
 
     # ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size)
 
     PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size)
+    PlotResults(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size)
