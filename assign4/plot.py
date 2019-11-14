@@ -99,9 +99,9 @@ def PlotAll(mode, model_name, dataset_name, num_hiddens, latent_sizes, xlim, yli
             x, y = GetOnePlot(model_name, dataset_name, num_hiddens, latent_size)
             if model_name == "WGAN":
                 y = - y
-            # if latent_size == 100:
-            #     x = x[:len(x)//2]
-            #     y = y[:len(y)//2]
+            if latent_size == 20:
+                x = x[:len(x)//2]
+                y = y[:len(y)//2]
             PlotWithSparse(x, y, ax, colors[i], model_name + " with latent size " + str(latent_size))
         ax.set_title("Influen of different latent sizes on " + model_name)
         ax.set_xlim(xlim)
@@ -152,13 +152,15 @@ if __name__ == "__main__":
     """
     model_names = ["GAN", "WGAN", "VAE"]
     dataset_names = ["MNIST", "CIFAR"]
-    latent_sizes = 50
-    num_hiddens = [0, 1, 2]
-
+    # latent_sizes = 50
+    # num_hiddens = [0, 1, 2]
+    latent_sizes = [10,20,50,100,200]
+    num_hiddens = 0
     
     if isinstance(latent_sizes, list):
         mode = "latents"
     else:
         mode = "hiddens"
         
-    PlotAll(mode, "WGAN", "CIFAR", num_hiddens, latent_sizes, [0, 200000], [-0.015, 0.08])
+
+    PlotAll(mode, "VAE", "MNIST", num_hiddens, latent_sizes, [0, 100000], [85, 140])
