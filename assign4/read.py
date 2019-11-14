@@ -79,7 +79,7 @@ def PlotChanges(model_name, dataset_name, num_hidden, latent_size, hidden_layer_
     Function:
         Result of inspecting.
     """
-    fig = plt.figure()
+    fig = plt.figure(figsize=(16, 4))
     ax1 = fig.add_subplot(111)
 
     imgs_all = []
