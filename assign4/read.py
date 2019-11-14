@@ -172,7 +172,7 @@ if __name__ == "__main__":
     dataset_name = "CIFAR"
 
     num_hidden = 0
-    latent_size = 50
+    latent_size = 10
     hidden_layer_size = 256
 
     # ReadAllSamples(model_name, dataset_name, num_hidden, latent_size, hidden_layer_size)
